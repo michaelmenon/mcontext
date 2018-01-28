@@ -55,14 +55,14 @@ func Get(key interface{}) (interface{}, bool) {
 }
 
 //delete a aprticualr key,value from the context
-func Erase(key interface{}) {
+func Delete(key interface{}) {
 	mutex.Lock()
 	delete(contextStore, key)
 	mutex.Unlock()
 }
 
 //Delete all the entries fro mthe context
-func Celar() {
+func Clear() {
 	mutex.Lock()
 	for key := range contextStore {
 		delete(contextStore, key)
