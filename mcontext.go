@@ -43,13 +43,13 @@ func Get(key interface{}) (interface{}, bool) {
 		return nil, false
 	}
 	mutex.Lock()
+	defer mutex.Unlock()
 	if value, ok := contextStore[key]; ok {
 		log.Println("Found store....")
 
-		mutex.Unlock()
 		return value, true
 	} else {
-		mutex.Unlock()
+
 		return nil, false
 	}
 }
