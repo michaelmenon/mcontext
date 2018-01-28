@@ -7,8 +7,6 @@ Its a thread safe context store.
 package mcontext
 
 import (
-	"log"
-
 	"sync"
 )
 
@@ -45,7 +43,6 @@ func Get(key interface{}) (interface{}, bool) {
 	mutex.Lock()
 	defer mutex.Unlock()
 	if value, ok := contextStore[key]; ok {
-		log.Println("Found store....")
 
 		return value, true
 	} else {
@@ -56,6 +53,9 @@ func Get(key interface{}) (interface{}, bool) {
 
 //delete a aprticualr key,value from the context
 func Delete(key interface{}) {
+	if key == nil {
+		return
+	}
 	mutex.Lock()
 	delete(contextStore, key)
 	mutex.Unlock()
